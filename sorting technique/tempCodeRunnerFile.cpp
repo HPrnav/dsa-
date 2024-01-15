@@ -1,0 +1,1 @@
+swap(arr[minindex],arr[j]);
