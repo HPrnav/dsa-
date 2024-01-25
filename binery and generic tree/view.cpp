@@ -55,6 +55,21 @@ void level_order(Node* root){
  }
 }
 
+void right_view(Node* root,int level, vector<int> &right ){
+if (root==NULL) return;
+
+if(level == right.size()) {right.push_back(root->val);}
+right_view(root->right,level+1,right);
+right_view(root->left,level+1,right);
+}
+
+
+void left_view(Node* root,int level, vector<int> &left ){
+if (root==NULL) return;
+if(level ==  left.size()) {left.push_back(root->val);}
+right_view(root->right,level+1,left);
+right_view(root->left,level+1,left);
+}
 
  void top_view(Node* root){
  queue<pair<Node* ,int>>q;
@@ -78,12 +93,29 @@ void level_order(Node* root){
     }
  }
  for(auto i:hdTonode){
-    cout<<i.second;
+    cout<<i.second<<endl;
  }
 }
 
 int main(){
  Node* root =create_node();
- level_order(root);
-top_view(root);
+ vector<int> right;
+ vector<int> left;
+level_order(root);
+
+// cout<<"TOP VIEW IS:";
+// top_view(root);
+
+
+cout<<"RIGHT  VIEW IS:";
+right_view(root,0,right);
+for(auto i:right) {cout<<i<<endl;}
+
+cout<<"LEFT VIEW IS ";
+right_view(root,0,left);
+for(auto i:left) {cout<<i<<endl;}
+
+
+// 6 5 4 -1 -1 3 -1 -1 7 8 -1 -1 9 -1 -1
+
 }
